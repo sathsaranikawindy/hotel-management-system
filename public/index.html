@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grand Horizon Resort - Hotel Booking APIs & Management</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Background Glow & Decoration -->
+  <div class="bg-blur blur-1"></div>
+  <div class="bg-blur blur-2"></div>
+
+  <div class="app-container">
+    <!-- Header Navbar -->
+    <header class="navbar glass">
+      <div class="logo">
+        <span class="logo-icon">✨</span>
+        <div>
+          <h1>Grand Horizon</h1>
+          <span class="subtext">SOA Hotel Booking Microservices</span>
+        </div>
+      </div>
+
+      <div class="user-status-bar" id="userStatusBar">
+        <span class="status-badge offline" id="authBadge">Not Logged In</span>
+        <div class="user-info hidden" id="userInfoBadge">
+          <span class="user-name" id="badgeUserName">Guest</span>
+          <button class="btn-sm btn-outline" id="btnLogout">Logout</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Navigation Tabs -->
+    <nav class="tab-nav glass">
+      <button class="tab-btn active" data-tab="tab-register">
+        <span class="tab-icon">👤</span> 1. User Registration
+      </button>
+      <button class="tab-btn" data-tab="tab-login">
+        <span class="tab-icon">🔑</span> 2. User Login
+      </button>
+      <button class="tab-btn" data-tab="tab-reviews">
+        <span class="tab-icon">⭐</span> 3. Guest Review & Rating
+      </button>
+      <button class="tab-btn highlight-tab" data-tab="tab-api-tester">
+        <span class="tab-icon">⚡</span> Interactive API Explorer
+      </button>
+    </nav>
+
+    <!-- Content Sections -->
+    <main class="content-area">
+
+      <!-- ================= TAB 1: REGISTRATION ================= -->
+      <section class="tab-pane active" id="tab-register">
+        <div class="grid-2">
+          <div class="glass-card">
+            <div class="card-header">
+              <h2>Create New Guest Account</h2>
+              <p>Execute User Registration Service (<code>POST /api/auth/register</code>)</p>
+            </div>
+            
+            <form id="formRegister" class="form">
+              <div class="form-group">
+                <label for="regName">Full Name</label>
+                <input type="text" id="regName" placeholder="e.g. Kasun Kalhara" required>
+              </div>
+
+              <div class="form-group">
+                <label for="regEmail">Email Address</label>
+                <input type="email" id="regEmail" placeholder="e.g. kasun@hotel.com" required>
+              </div>
+
+              <div class="form-group">
+                <label for="regPassword">Password</label>
+                <input type="password" id="regPassword" placeholder="Minimum 6 characters" required>
+              </div>
+
+              <div class="form-group">
+                <label for="regRole">User Role</label>
+                <select id="regRole">
+                  <option value="guest">Guest / Customer</option>
+                  <option value="admin">Hotel Administrator</option>
+                </select>
+              </div>
+
+              <button type="submit" class="btn btn-primary" id="btnRegisterSubmit">
+                Register User API
+              </button>
+            </form>
+          </div>
+
+          <div class="glass-card result-card">
+            <div class="card-header">
+              <h3>Registration Response Payload</h3>
+              <span class="endpoint-tag post">POST /api/auth/register</span>
+            </div>
+            <pre class="json-viewer" id="regResponseJson">// API JSON response will appear here...</pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= TAB 2: LOGIN ================= -->
+      <section class="tab-pane" id="tab-login">
+        <div class="grid-2">
+          <div class="glass-card">
+            <div class="card-header">
+              <h2>User Login & Auth Token</h2>
+              <p>Execute Login Service (<code>POST /api/auth/login</code>)</p>
+            </div>
+
+            <form id="formLogin" class="form">
+              <div class="form-group">
+                <label for="loginEmail">Email Address</label>
+                <input type="email" id="loginEmail" placeholder="sarah@example.com" required>
+              </div>
+
+              <div class="form-group">
+                <label for="loginPassword">Password</label>
+                <input type="password" id="loginPassword" placeholder="••••••••" required>
+              </div>
+
+              <div class="form-hint">
+                💡 Demo Account: <code>sarah@example.com</code> / <code>password123</code>
+              </div>
+
+              <button type="submit" class="btn btn-primary" id="btnLoginSubmit">
+                Authenticate & Get JWT Token
+              </button>
+            </form>
+
+            <hr class="divider">
+
+            <div class="jwt-token-box">
+              <label>Active Bearer Token (JWT):</label>
+              <div class="token-input-wrapper">
+                <input type="text" id="activeJwtToken" readonly placeholder="No token generated yet">
+                <button class="btn-sm btn-copy" id="btnCopyToken">Copy</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="glass-card result-card">
+            <div class="card-header">
+              <h3>Authentication Profile & Response</h3>
+              <span class="endpoint-tag post">POST /api/auth/login</span>
+            </div>
+            <pre class="json-viewer" id="loginResponseJson">// API JSON response will appear here...</pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= TAB 3: GUEST REVIEWS & RATINGS ================= -->
+      <section class="tab-pane" id="tab-reviews">
+        <div class="grid-2">
+          <!-- Left Column: Submit Review Form -->
+          <div class="glass-card">
+            <div class="card-header">
+              <h2>Submit Guest Review & Rating</h2>
+              <p>Execute Review Service (<code>POST /api/reviews</code>)</p>
+            </div>
+
+            <form id="formReview" class="form">
+              <div class="form-group">
+                <label for="reviewRoomSelect">Select Room</label>
+                <select id="reviewRoomSelect">
+                  <option value="room_101">Deluxe Ocean Suite (Room 101)</option>
+                  <option value="room_102">Grand Executive Suite (Room 102)</option>
+                  <option value="room_103">Royal Presidential Suite (Room 103)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label>Star Rating (1 to 5 Stars)</label>
+                <div class="star-rating-picker" id="starPicker">
+                  <span class="star" data-val="1">★</span>
+                  <span class="star" data-val="2">★</span>
+                  <span class="star" data-val="3">★</span>
+                  <span class="star" data-val="4">★</span>
+                  <span class="star active" data-val="5">★</span>
+                </div>
+                <input type="hidden" id="reviewRatingVal" value="5">
+              </div>
+
+              <div class="form-group">
+                <label for="reviewTitle">Review Title</label>
+                <input type="text" id="reviewTitle" placeholder="e.g. Exceptional service and sunset view!" required>
+              </div>
+
+              <div class="form-group">
+                <label for="reviewComment">Detailed Review Comment</label>
+                <textarea id="reviewComment" rows="4" placeholder="Share your stay experience, room quality, cleanliness..." required></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary" id="btnSubmitReview">
+                Submit Guest Review
+              </button>
+            </form>
+          </div>
+
+          <!-- Right Column: Room Rating Metrics & Live Reviews Feed -->
+          <div class="glass-card">
+            <div class="card-header flex-between">
+              <div>
+                <h2>Room Rating Analytics</h2>
+                <p>Metrics from <code>GET /api/reviews/summary/:roomId</code></p>
+              </div>
+              <select id="filterRoomId" class="select-sm">
+                <option value="room_101">Room 101 (Deluxe)</option>
+                <option value="room_102">Room 102 (Executive)</option>
+                <option value="room_103">Room 103 (Presidential)</option>
+              </select>
+            </div>
+
+            <!-- Score Summary Widget -->
+            <div class="rating-summary-widget" id="ratingSummaryWidget">
+              <div class="score-box">
+                <span class="score-num" id="avgScore">4.8</span>
+                <div class="stars-gold" id="avgStars">★★★★★</div>
+                <span class="total-reviews-count" id="totalReviewsCount">Based on 2 reviews</span>
+              </div>
+
+              <div class="rating-bars" id="ratingBars">
+                <div class="bar-row">
+                  <span>5 ★</span>
+                  <div class="progress-bg"><div class="progress-fill" style="width: 50%"></div></div>
+                  <span class="count">1</span>
+                </div>
+                <div class="bar-row">
+                  <span>4 ★</span>
+                  <div class="progress-bg"><div class="progress-fill" style="width: 50%"></div></div>
+                  <span class="count">1</span>
+                </div>
+                <div class="bar-row">
+                  <span>3 ★</span>
+                  <div class="progress-bg"><div class="progress-fill" style="width: 0%"></div></div>
+                  <span class="count">0</span>
+                </div>
+                <div class="bar-row">
+                  <span>2 ★</span>
+                  <div class="progress-bg"><div class="progress-fill" style="width: 0%"></div></div>
+                  <span class="count">0</span>
+                </div>
+                <div class="bar-row">
+                  <span>1 ★</span>
+                  <div class="progress-bg"><div class="progress-fill" style="width: 0%"></div></div>
+                  <span class="count">0</span>
+                </div>
+              </div>
+            </div>
+
+            <hr class="divider">
+
+            <h3>Recent Guest Reviews Feed</h3>
+            <div class="reviews-feed" id="reviewsFeed">
+              <!-- Dynamically populated review cards -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= TAB 4: INTERACTIVE API EXPLORER ================= -->
+      <section class="tab-pane" id="tab-api-tester">
+        <div class="glass-card">
+          <div class="card-header">
+            <h2>REST API Endpoint Console</h2>
+            <p>Test all 3 microservices directly with real HTTP payloads</p>
+          </div>
+
+          <div class="api-grid">
+            <!-- Left: Endpoint Selector & Request Config -->
+            <div class="api-config">
+              <div class="form-group">
+                <label>Select API Endpoint</label>
+                <select id="apiEndpointSelect">
+                  <option value="POST_REGISTER">1. User Registration - POST /api/auth/register</option>
+                  <option value="POST_LOGIN">2. User Login - POST /api/auth/login</option>
+                  <option value="GET_ME">2. Get Profile - GET /api/auth/me</option>
+                  <option value="POST_REVIEW">3. Create Review - POST /api/reviews</option>
+                  <option value="GET_REVIEWS">3. Get Reviews - GET /api/reviews</option>
+                  <option value="GET_SUMMARY">3. Room Summary - GET /api/reviews/summary/room_101</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label>Request JSON Body</label>
+                <textarea id="apiRequestBody" rows="8" class="code-font"></textarea>
+              </div>
+
+              <button class="btn btn-accent" id="btnExecuteApi">
+                ▶ Send HTTP Request
+              </button>
+            </div>
+
+            <!-- Right: Response Console -->
+            <div class="api-output">
+              <div class="console-status">
+                <span>Response Status: <strong id="apiResponseStatus" class="status-code">--</strong></span>
+                <span id="apiResponseTime" class="time-code">0 ms</span>
+              </div>
+              <pre class="json-viewer console-box" id="apiResponseOutput">// HTTP response body will be formatted here...</pre>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>Grand Horizon Resort • Service Oriented Hotel Booking API Suite (Part 1: Registration, Part 2: Login, Part 3: Guest Review & Rating)</p>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

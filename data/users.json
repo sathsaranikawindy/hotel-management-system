@@ -1,0 +1,26 @@
+[
+  {
+    "id": "usr_demo_1",
+    "name": "Sarah Jenkins",
+    "email": "sarah@example.com",
+    "passwordHash": "$2a$10$wE8D/.0DlygO5Fj2zvhx.ebYg2s8mJdK4s5.pZ0XG5.4b1.9.Z0yS",
+    "role": "guest",
+    "createdAt": "2026-08-10T10:00:00.000Z"
+  },
+  {
+    "id": "usr_demo_2",
+    "name": "Michael Chen",
+    "email": "michael@example.com",
+    "passwordHash": "$2a$10$wE8D/.0DlygO5Fj2zvhx.ebYg2s8mJdK4s5.pZ0XG5.4b1.9.Z0yS",
+    "role": "guest",
+    "createdAt": "2026-08-12T14:30:00.000Z"
+  },
+  {
+    "id": "usr_1786891479493",
+    "name": "Verification User",
+    "email": "vuser@test.com",
+    "passwordHash": "$2a$10$QpU6BSAwaxrRw9gJdxaxFO61Glpdw2Kxx/oLVICSgJESX6szPYnVi",
+    "role": "guest",
+    "createdAt": "2026-08-16T14:44:39.493Z"
+  }
+]

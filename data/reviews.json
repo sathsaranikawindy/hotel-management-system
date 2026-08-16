@@ -1,0 +1,46 @@
+[
+  {
+    "id": "rev_1786891479605",
+    "roomId": "room_101",
+    "roomName": "Deluxe Ocean Suite",
+    "userId": "usr_1786891479493",
+    "userName": "Verification User",
+    "rating": 5,
+    "title": "Superb stay",
+    "comment": "Loved everything!",
+    "createdAt": "2026-08-16T14:44:39.605Z"
+  },
+  {
+    "id": "rev_101",
+    "roomId": "room_101",
+    "roomName": "Deluxe Ocean Suite",
+    "userId": "usr_demo_1",
+    "userName": "Sarah Jenkins",
+    "rating": 5,
+    "title": "Breathtaking Ocean Views!",
+    "comment": "The room was immaculate with modern decor and exceptional balcony views of the sunset. Staff service was top tier.",
+    "createdAt": "2026-08-14T11:20:00.000Z"
+  },
+  {
+    "id": "rev_102",
+    "roomId": "room_101",
+    "roomName": "Deluxe Ocean Suite",
+    "userId": "usr_demo_2",
+    "userName": "Michael Chen",
+    "rating": 4,
+    "title": "Great stay, comfortable bed",
+    "comment": "Very spacious and quiet. Breakfast room service was prompt. Highly recommended for couples.",
+    "createdAt": "2026-08-15T09:15:00.000Z"
+  },
+  {
+    "id": "rev_103",
+    "roomId": "room_102",
+    "roomName": "Grand Executive Suite",
+    "userId": "usr_demo_1",
+    "userName": "Sarah Jenkins",
+    "rating": 5,
+    "title": "Luxurious amenity package!",
+    "comment": "The private hot tub and king bed were incredible. Everything was sanitized and perfectly prepared.",
+    "createdAt": "2026-08-16T08:45:00.000Z"
+  }
+]
